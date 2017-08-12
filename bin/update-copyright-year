@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+# shellcheck source=functions
+source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+
+run_custom_script update-copyright-year "$@"
+
+author="$(get author-name)"
+license="$(get license-file)"
+declare -r updated="$license.updated"
+declare -i count=0
+
+trap 'rm -f -- $updated' EXIT
+
+substitute() {
+  local -r year="$(git log --date=format:%Y --pretty=format:%ad | sort -r | head -n 1)"
+  {
+    while IFS= read -r line ; do
+      local pattern='^Copyright [(]c[)] [0-9]{4} (.*)$'
+      if [[ "$line" =~ $pattern ]] && [[ "${BASH_REMATCH[1]}" == "$author" ]] ; then
+        (( count += 1 ))
+        echo "Copyright (c) $year $author"
+      else
+        echo "$line"
+      fi
+    done
+  }
+}
+substitute <"$license" >"$updated"
+
+if (( count == 0 )) ; then
+  echo "Copyright attribution not found for $author" >&2
+  exit 1
+fi
+
+mv "$updated" "$license"
+git --no-pager diff "$license"

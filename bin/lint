@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+# shellcheck source=functions
+source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+
+run_custom_script lint "$@"
+
+set +f ; shopt -s nullglob
+# shellcheck disable=SC2207
+files=($(get source-files))
+set -f ; shopt -u nullglob
+
+if [[ "${PUBLISHING-false}" == true ]] ; then
+  echo 'Running "npm install" to negate "npm prune"'
+  rm -r node_modules
+  npm install
+fi
+
+run check-required-files
+node_modules/.bin/eslint \
+  --report-unused-disable-directives \
+  -- "${files[@]}" '*.js' 'test/**/*.js'
+run lint-package-json
+run lint-bower-json
+run lint-readme
+run lint-commit-messages

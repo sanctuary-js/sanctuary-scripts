@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+# shellcheck source=functions
+source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+
+run_custom_script test "$@"
+
+branches="$(get min-branch-coverage)"
+
+node_modules/.bin/istanbul cover node_modules/.bin/_mocha
+node_modules/.bin/istanbul check-coverage --branches "$branches"

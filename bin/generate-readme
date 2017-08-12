@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+# shellcheck source=functions
+source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+
+run_custom_script generate-readme "$@"
+
+set +f ; shopt -s nullglob
+# shellcheck disable=SC2207
+files=($(get source-files))
+set -f ; shopt -u nullglob
+
+(( ${#files[@]} == 0 )) && exit 0
+
+owner="$(get repo-owner)"
+name="$(get repo-name)"
+heading_level="$(get heading-level)"
+heading_prefix="$(get heading-prefix)"
+comment_prefix="$(get comment-prefix)"
+version_prefix="$(get version-tag-prefix)"
+
+transcribe() {
+  node_modules/.bin/transcribe \
+    --heading-level "$heading_level" \
+    --heading-prefix "//$heading_prefix" \
+    --prefix "//$comment_prefix" \
+    --url "https://github.com/${owner}/${name}/blob/${version_prefix}${VERSION?Environment variable not set}/{filename}#L{line}" \
+    -- "$@"
+}
+
+insert_version_urls() {
+  declare -A dependencies
+  while IFS=$'\t' read -r k v ; do dependencies["$k"]="$v" ; done <<<"$(node --eval '
+    const pkg = require("./package.json");
+    const log = o => Object.keys(o).forEach(k => { console.log(k + "\t" + o[k]); });
+    log(pkg.dependencies);
+    log(pkg.devDependencies);
+  ')"
+
+  local -r pattern1='^<h4 name="([^"]*)#([^"]*)">'
+  local -r pattern2='^(.+) ([Vv]):([^/]+)/([^# ]+)'  # V => 1.2.3 ; v => v1.2.3
+  local -r pattern3='^[0-9]+[.][0-9]+[.][0-9]+$'
+  while IFS= read -r line ; do
+    if [[ "$line" =~ $pattern1 ]] ; then
+      local matches=("${BASH_REMATCH[@]}")
+      echo "<h4 name="'"'"${matches[1]}.prototype.${matches[2]}"'"'">${line:${#matches[0]}}"
+    elif [[ "$line" =~ $pattern2 ]] ; then
+      local matches=("${BASH_REMATCH[@]}")
+      local name="${matches[4]}"
+      local version="${dependencies["$name"]}"
+      if ! [[ "$version" =~ $pattern3 ]] ; then
+        echo "Exact version not specified for $name" >&2
+        exit 1
+      fi
+      echo "${matches[1]} https://github.com/${matches[3]}/${name}/tree/${matches[2]/V/}${version}${line:${#matches[0]}}"
+    else
+      echo "$line"
+    fi
+  done
+}
+
+transcribe "${files[@]}" | insert_version_urls >README.md

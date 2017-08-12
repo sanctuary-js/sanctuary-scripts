@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+# shellcheck source=functions
+source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+
+run_custom_script prepublish "$@"
+
+license="$(get license-file)"
+
+set +f ; shopt -s nullglob
+# shellcheck disable=SC2207
+files=($(get source-files))
+set -f ; shopt -u nullglob
+
+run update-copyright-year
+git add -- "$license"
+
+run generate-readme
+git add -- README.md
+
+for file in "${files[@]}" $(find test -name '*.js' | sort) ; do
+  sed "s/ version = '.*';/ version = '$VERSION';/" "$file" >"$file.updated"
+  mv -- "$file.updated" "$file"
+  git add -- "$file"
+done

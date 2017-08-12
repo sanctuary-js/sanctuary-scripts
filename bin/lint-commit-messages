@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+# shellcheck source=functions
+source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+
+run_custom_script lint-commit-messages "$@"
+
+default_branch="$(get default-branch)"
+
+declare -r -i max_length=72
+
+pull_request_number() {
+  git log --grep '^Merge pull request #[1-9]' --pretty=format:%s \
+  | cut -d '#' -f 2 \
+  | cut -d ' ' -f 1 \
+  | sort --numeric-sort --reverse \
+  | head -n 1
+}
+
+project_name() {
+  git config --get remote.origin.url \
+  | sed -e 's,^git@github[.]com:,,' -e 's,^https://github[.]com/,,' \
+  | cut -d / -f 1
+}
+
+branch_name() {
+  git rev-parse --abbrev-ref HEAD
+}
+
+# Find all commits to be merged, and assert that none of them exceeds
+# the character limit. Ignore merge commits to accommodate Travis, which
+# makes a merge commit (with a long message) in order to test the result
+# of merging the pull request.
+if git log --no-merges --format=%s "$default_branch.." | grep ".\\{$max_length\\}." ; then
+  fail "At least one commit summary exceeds $max_length-character limit"
+  exit 1
+fi
+
+# Add a digit to the number of the most recently opened pull request
+# merged so far. If the largest number encountered is #42, say, the
+# current pull request can safely be numbered between #43 and #999.
+message="Merge pull request #9$(pull_request_number | tr '[:digit:]' 9) from $(project_name)/$(branch_name)"
+if (( "${#message}" <= max_length )) ; then
+  pass "$message (${#message} characters)"
+else
+  fail "Branch name is too long. Merge commit summary would exceed $max_length characters:"
+  echo
+  echo "  $message"
+  exit 1
+fi

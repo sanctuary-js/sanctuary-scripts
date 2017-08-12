@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+# shellcheck source=functions
+source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+
+run_custom_script lint-json "$@"
+
+files=("$@")
+
+cleanup() {
+  for file in "${files[@]}" ; do
+    rm -f -- "$file.reformatted"
+  done
+}
+
+trap cleanup EXIT
+
+for file in "${files[@]}" ; do
+  if [[ "$file" != *.json ]] ; then
+    fail "$file lacks .json extension"
+    exit 1
+  fi
+  if ! test -f "$file" ; then
+    fail "$file does not exist"
+    exit 1
+  fi
+  [[ "$file" == [./]* ]] || file="./$file"
+  node --print "JSON.stringify(require('$file'), null, 2)" >"$file.reformatted"
+  git --no-pager diff --no-index -- "$file" "$file.reformatted"
+done

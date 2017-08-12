@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+get() {
+  local config k k_ v v_
+
+  config="$(pwd)/.config"
+  if ! test -f "$config" ; then
+    echo "$config does not exist" >&2
+    return 1
+  fi
+
+  while IFS='=' read -r k v ; do
+    k_="${k% }"
+    v_="${v# }"
+    if [[ "$k_" == "$1" ]] ; then
+      printf '%s' "$v_"
+      return 0
+    fi
+  done <"$config"
+
+  case "$1" in
+    default-branch)         printf 'master' ;;
+    min-branch-coverage)    printf '100' ;;
+    author-name)            printf 'Sanctuary' ;;
+    license-file)           printf 'LICENSE' ;;
+    source-files)           printf 'index.js' ;;
+    heading-level)          printf '4' ;;
+    heading-prefix)         printf '#' ;;
+    comment-prefix)         printf '.' ;;
+    version-tag-prefix)     printf 'v' ;;
+    *)
+      echo "'$1' not defined in $config" >&2
+      return 1
+  esac
+}
+
+exec_path() {
+  if [[ "$(basename "$0")" == sanctuary-* ]] ; then
+    printf '%s' "node_modules/.bin/sanctuary-$1"
+  else
+    printf '%s' "bin/$1"
+  fi
+}
+
+run() {
+  "$(exec_path "$1")" "${@:2}"
+}
+
+run_custom_script() {
+  local IFS=: script scripts
+  test -x "scripts/$1" || return 0
+  read -r -a scripts <<<"${CUSTOM_SCRIPTS_RUN-}"
+  # https://stackoverflow.com/a/7577209/312785
+  for script in "${scripts[@]+"${scripts[@]}"}" ; do
+    [[ "$script" == "$1" ]] && return 0
+  done
+  scripts+=("$1")
+  CUSTOM_SCRIPTS_RUN="${scripts[*]}" "scripts/$1" "${@:2}"
+  exit 0
+}
+
+pass() {
+  echo $'\x1B[0;32m\xE2\x9C\x94\x1B[0m' "$@"
+}
+
+fail() {
+  echo $'\x1B[0;31m\xE2\x9C\x98\x1B[0m' "$@"
+}

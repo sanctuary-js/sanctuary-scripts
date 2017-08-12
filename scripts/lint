@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+# shellcheck source=functions
+source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+
+set +f
+
+shellcheck --version
+shellcheck --external-sources --shell=bash -- bin/* scripts/* functions
+
+bin/lint
+
+if [[ "$(node --print 'const pkg = require("./package.json"); Object.keys(pkg.bin).map(k => pkg.bin[k]).join("\n")')" == "$(find bin -type f | sort)" ]] ; then
+  pass 'pkg.bin contains all scripts in bin directory'
+else
+  fail 'pkg.bin contains all scripts in bin directory'
+  exit 1
+fi
+
+header() {
+  cat <<EOF
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+# shellcheck source=functions
+source "\${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+
+run_custom_script $1 "\$@"
+EOF
+}
+
+for file in bin/* ; do
+  if [[ "$(head -n 7 "$file" | shasum -a 256)" == "$(header "$(basename "$file")" | shasum -a 256)" ]] ; then
+    pass "$file"
+  else
+    fail "$file"
+    exit 1
+  fi
+done

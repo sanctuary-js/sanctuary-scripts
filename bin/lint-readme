@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+# shellcheck source=functions
+source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+
+run_custom_script lint-readme "$@"
+
+if test -f README.md ; then
+  cp README.md README.md.orig
+  trap 'mv README.md.orig README.md' EXIT
+else
+  trap 'rm README.md' EXIT
+fi
+
+VERSION=0.0.0 run generate-readme
+
+node_modules/.bin/remark \
+  --frail \
+  --no-stdout \
+  --use remark-lint-no-undefined-references \
+  --use remark-lint-no-unused-definitions \
+  -- README.md
