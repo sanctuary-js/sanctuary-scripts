@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+# shellcheck source=functions
+source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+
+run_custom_script doctest "$@"
+
+set +f ; shopt -s nullglob
+# shellcheck disable=SC2207
+files=($(get source-files))
+set -f ; shopt -u nullglob
+
+prefix="$(get comment-prefix)"
+
+node_modules/.bin/doctest --module commonjs --prefix "$prefix" -- "${files[@]}"

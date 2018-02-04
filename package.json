@@ -1,0 +1,52 @@
+{
+  "name": "sanctuary-scripts",
+  "version": "0.0.0",
+  "description": "Shell scripts used in multiple Sanctuary projects",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sanctuary-js/sanctuary-scripts.git"
+  },
+  "files": [
+    "/bin/",
+    "/LICENSE",
+    "/README.md",
+    "/functions",
+    "/package.json"
+  ],
+  "bin": {
+    "sanctuary-check-required-files": "bin/check-required-files",
+    "sanctuary-doctest": "bin/doctest",
+    "sanctuary-generate-readme": "bin/generate-readme",
+    "sanctuary-lint": "bin/lint",
+    "sanctuary-lint-bower-json": "bin/lint-bower-json",
+    "sanctuary-lint-commit-messages": "bin/lint-commit-messages",
+    "sanctuary-lint-json": "bin/lint-json",
+    "sanctuary-lint-package-json": "bin/lint-package-json",
+    "sanctuary-lint-readme": "bin/lint-readme",
+    "sanctuary-prepublish": "bin/prepublish",
+    "sanctuary-release": "bin/release",
+    "sanctuary-test": "bin/test",
+    "sanctuary-update-copyright-year": "bin/update-copyright-year"
+  },
+  "dependencies": {
+    "doctest": "0.13.x",
+    "eslint": "4.9.x",
+    "istanbul": "0.4.x",
+    "mocha": "5.x.x",
+    "remark-cli": "5.x.x",
+    "remark-lint-no-undefined-references": "1.x.x",
+    "remark-lint-no-unused-definitions": "1.x.x",
+    "remember-bower": "0.1.x",
+    "sanctuary-style": "1.0.x",
+    "transcribe": "1.0.x",
+    "xyz": "3.0.x"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "doctest": "bin/doctest",
+    "lint": "bin/lint",
+    "release": "bin/release",
+    "test": "npm run lint && bin/test && npm run doctest"
+  }
+}

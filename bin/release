@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+# shellcheck source=functions
+source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+
+run_custom_script release "$@"
+
+declare -r increment="$1"
+owner="$(get repo-owner)"
+name="$(get repo-name)"
+branch="$(get default-branch)"
+prefix="$(get version-tag-prefix)"
+
+PUBLISHING=true node_modules/.bin/xyz \
+  --branch "${branch}" \
+  --increment "${increment}" \
+  --repo "git@github.com:${owner}/${name}.git" \
+  --script "$(exec_path prepublish)" \
+  --tag "${prefix}X.Y.Z"

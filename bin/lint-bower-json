@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+# shellcheck source=functions
+source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+
+run_custom_script lint-bower-json "$@"
+
+test -f bower.json || exit 0
+
+run lint-json bower.json
+
+node_modules/.bin/remember-bower "$(pwd)"

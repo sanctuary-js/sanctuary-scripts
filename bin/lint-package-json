@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+# shellcheck source=functions
+source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+
+run_custom_script lint-package-json "$@"
+
+owner="$(get repo-owner)"
+name="$(get repo-name)"
+
+run lint-json package.json
+
+declare -i failures=0
+
+assert() {
+  if node <<EOF
+    var pkg = require('./package.json');
+
+    var isArray = Array.isArray;
+
+    function isSortedObject(x) {
+      return typeof x == 'object' && x != null &&
+             (JSON.stringify(Object.keys(x)) ===
+              JSON.stringify(Object.keys(x).sort()));
+    }
+
+    function matches(x, pattern) {
+      return typeof x == 'string' && pattern.test(x);
+    }
+
+    process.exit(($1) === true ? 0 : 1);
+EOF
+  then
+    pass "$1"
+  else
+    fail "$1"
+    (( failures += 1 ))
+  fi
+}
+
+assert "pkg.name === '$name' || pkg.name === '@$owner/$name'"
+
+assert "matches(pkg.version, /./)"
+
+assert "!('private' in pkg)"
+
+assert "matches(pkg.description, /.{10}/)"
+
+assert "matches(pkg.license, /./)"
+
+assert "isSortedObject(pkg.repository)
+        && pkg.repository.type === 'git'
+        && pkg.repository.url === 'git://github.com/$owner/$name.git'"
+
+assert "isSortedObject(pkg.scripts)
+        && matches(pkg.scripts.doctest, /^(bin[/]|sanctuary-)doctest$/)
+        && matches(pkg.scripts.lint,    /^(bin[/]|sanctuary-)lint$/)
+        && matches(pkg.scripts.release, /^(bin[/]|sanctuary-)release$/)
+        && matches(pkg.scripts.test,    /^npm run lint && (bin[/]|sanctuary-)test && npm run doctest$/)"
+
+assert "isSortedObject(pkg.dependencies)"
+
+assert "isSortedObject(pkg.devDependencies)"
+
+assert "isArray(pkg.files)"
+
+if (( failures > 0 )) ; then exit 1 ; fi

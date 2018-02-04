@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euf -o pipefail
+
+# shellcheck source=functions
+source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+
+run_custom_script check-required-files "$@"
+
+license="$(get license-file)"
+declare -i failures=0
+
+check() {
+  if test "$1" "$2" ; then
+    pass "test $1 $2"
+  else
+    fail "test $1 $2"
+    (( failures += 1 ))
+  fi
+}
+
+check -f .config
+check -f .eslintrc.json
+check -f .gitignore
+check -f .npmrc
+check -f CONTRIBUTING.md
+check -f "$license"
+check -f package.json
+
+if (( failures > 0 )) ; then exit 1 ; fi
