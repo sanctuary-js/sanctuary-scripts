@@ -1,6 +1,6 @@
 {
   "name": "sanctuary-scripts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Shell scripts used in multiple Sanctuary projects",
   "license": "MIT",
   "repository": {
