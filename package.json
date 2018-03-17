@@ -38,7 +38,7 @@
     "remark-lint-no-undefined-references": "1.x.x",
     "remark-lint-no-unused-definitions": "1.x.x",
     "remember-bower": "0.1.x",
-    "sanctuary-style": "1.0.x",
+    "sanctuary-style": "1.1.x",
     "transcribe": "1.0.x",
     "xyz": "3.0.x"
   },
