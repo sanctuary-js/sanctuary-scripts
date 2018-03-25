@@ -30,7 +30,7 @@
     "sanctuary-update-copyright-year": "bin/update-copyright-year"
   },
   "dependencies": {
-    "doctest": "0.13.x",
+    "doctest": "0.14.x",
     "eslint": "4.9.x",
     "istanbul": "0.4.x",
     "mocha": "5.x.x",
