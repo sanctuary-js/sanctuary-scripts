@@ -47,7 +47,11 @@ assert "!('private' in pkg)"
 
 assert "matches(pkg.description, /.{10}/)"
 
-assert "matches(pkg.license, /./)"
+assert "(function() {
+          var parse = require('spdx-expression-parse');
+          try { parse(pkg.license); } catch (err) { return false; }
+          return true;
+        }())"
 
 assert "isSortedObject(pkg.repository)
         && pkg.repository.type === 'git'
