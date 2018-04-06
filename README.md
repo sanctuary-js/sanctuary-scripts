@@ -185,11 +185,10 @@ undefined link references or unused link definitions.
 
 ### `prepublish`
 
-Runs [`update-copyright-year`][] and [`generate-readme`][], and replaces
-all occurrences of ` version = '.*';` in source files and test files
-(`find test -name '*.js'`) with ` version = '$VERSION';`.
+Runs [`update-copyright-year`][] and [`generate-readme`][], and marks (via
+`git add`) the licence file and readme for inclusion in the release commit.
 
-Configurable via [variables][] (`source-files`).
+Configurable via [variables][] (`license-file`).
 
 :warning: _This script is intended to be run indirectly via [`release`][]._
 
