@@ -39,6 +39,7 @@
     "remark-lint-no-unused-definitions": "1.x.x",
     "remember-bower": "0.1.x",
     "sanctuary-style": "1.1.x",
+    "spdx-expression-parse": "3.0.x",
     "transcribe": "1.0.x",
     "xyz": "3.0.x"
   },
