@@ -29,6 +29,9 @@
     "sanctuary-test": "bin/test",
     "sanctuary-update-copyright-year": "bin/update-copyright-year"
   },
+  "engines": {
+    "npm": ">=3.0.0"
+  },
   "dependencies": {
     "doctest": "0.14.x",
     "eslint": "4.9.x",
