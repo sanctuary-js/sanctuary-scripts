@@ -38,7 +38,8 @@ insert_version_urls() {
     log(pkg.devDependencies);
   ')"
 
-  local -r pattern1='^(#### <a name=")([^"]*)(".*)$'
+  local hashes='######'
+  local -r pattern1='^('${hashes:0:$heading_level}' <a name=")([^"]*)(".*)$'
   local -r pattern2='^(.+) ([Vv]):([^/]+)/([^# ]+)'  # V => 1.2.3 ; v => v1.2.3
   local -r pattern3='^[0-9]+[.][0-9]+[.][0-9]+$'
   while IFS= read -r line ; do
