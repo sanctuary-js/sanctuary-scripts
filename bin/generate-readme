@@ -38,13 +38,13 @@ insert_version_urls() {
     log(pkg.devDependencies);
   ')"
 
-  local -r pattern1='^<h4 name="([^"]*)#([^"]*)">'
+  local -r pattern1='^(#### <a name=")([^"]*)(".*)$'
   local -r pattern2='^(.+) ([Vv]):([^/]+)/([^# ]+)'  # V => 1.2.3 ; v => v1.2.3
   local -r pattern3='^[0-9]+[.][0-9]+[.][0-9]+$'
   while IFS= read -r line ; do
     if [[ "$line" =~ $pattern1 ]] ; then
       local matches=("${BASH_REMATCH[@]}")
-      echo "<h4 name="'"'"${matches[1]}.prototype.${matches[2]}"'"'">${line:${#matches[0]}}"
+      echo "${matches[1]}${matches[2]/'#'/.prototype.}${matches[3]}"
     elif [[ "$line" =~ $pattern2 ]] ; then
       local matches=("${BASH_REMATCH[@]}")
       local name="${matches[4]}"
