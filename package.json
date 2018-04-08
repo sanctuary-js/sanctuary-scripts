@@ -43,7 +43,7 @@
     "remember-bower": "0.1.x",
     "sanctuary-style": "1.1.x",
     "spdx-expression-parse": "3.0.x",
-    "transcribe": "1.0.x",
+    "transcribe": "1.1.1",
     "xyz": "3.0.x"
   },
   "devDependencies": {},
