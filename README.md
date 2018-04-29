@@ -40,7 +40,13 @@ __sanctuary-generate-readme__ when using npm scripts).
     ```json
     {
       "root": true,
-      "extends": ["./node_modules/sanctuary-style/eslint-es3.json"]
+      "extends": ["./node_modules/sanctuary-style/eslint-es3.json"],
+      "overrides": [
+        {
+          "files": ["*.md"],
+          "plugins": ["markdown"]
+        }
+      ]
     }
     ```
 
@@ -183,6 +189,9 @@ Configurable via [variables][] (`repo-owner`, `repo-name`).
 Uses [`remark`↗︎][] to assert that the readme, when built, will not contain any
 undefined link references or unused link definitions.
 
+Uses [`eslint`↗︎][] and [`eslint-plugin-markdown`↗︎][] to assert that the readme,
+when built, will not contain examples which violate the project's style guide.
+
 ### `prepublish`
 
 Runs [`update-copyright-year`][] and [`generate-readme`][], and marks (via
@@ -218,26 +227,27 @@ Assumes that the licence file contains `Copyright (c) <year> <author-name>`.
 Configurable via [variables][] (`author-name`, `license-file`).
 
 
-[`check-required-files`]:   #check-required-files
-[`doctest`]:                #doctest
-[`generate-readme`]:        #generate-readme
-[`lint`]:                   #lint
-[`lint-bower-json`]:        #lint-bower-json
-[`lint-commit-messages`]:   #lint-commit-messages
-[`lint-package-json`]:      #lint-package-json
-[`lint-readme`]:            #lint-readme
-[`prepublish`]:             #prepublish
-[`release`]:                #release
-[`test`]:                   #test
-[`update-copyright-year`]:  #update-copyright-year
-[custom scripts]:           #custom-scripts
-[variables]:                #variables
+[`check-required-files`]:     #check-required-files
+[`doctest`]:                  #doctest
+[`generate-readme`]:          #generate-readme
+[`lint`]:                     #lint
+[`lint-bower-json`]:          #lint-bower-json
+[`lint-commit-messages`]:     #lint-commit-messages
+[`lint-package-json`]:        #lint-package-json
+[`lint-readme`]:              #lint-readme
+[`prepublish`]:               #prepublish
+[`release`]:                  #release
+[`test`]:                     #test
+[`update-copyright-year`]:    #update-copyright-year
+[custom scripts]:             #custom-scripts
+[variables]:                  #variables
 
-[Istanbul↗︎]:                https://istanbul.js.org/
-[Mocha↗︎]:                   https://mochajs.org/
-[`doctest`↗︎]:               https://github.com/davidchambers/doctest
-[`eslint`↗︎]:                https://eslint.org/
-[`remark`↗︎]:                http://remark.js.org/
-[`remember-bower`↗︎]:        https://github.com/davidchambers/remember-bower
-[`transcribe`↗︎]:            https://github.com/plaid/transcribe
-[`xyz`↗︎]:                   https://github.com/davidchambers/xyz
+[Istanbul↗︎]:                  https://istanbul.js.org/
+[Mocha↗︎]:                     https://mochajs.org/
+[`doctest`↗︎]:                 https://github.com/davidchambers/doctest
+[`eslint`↗︎]:                  https://eslint.org/
+[`eslint-plugin-markdown`↗︎]:  https://github.com/eslint/eslint-plugin-markdown
+[`remark`↗︎]:                  http://remark.js.org/
+[`remember-bower`↗︎]:          https://github.com/davidchambers/remember-bower
+[`transcribe`↗︎]:              https://github.com/plaid/transcribe
+[`xyz`↗︎]:                     https://github.com/davidchambers/xyz

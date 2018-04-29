@@ -8,10 +8,37 @@ run_custom_script lint-readme "$@"
 
 if test -f README.md ; then
   cp README.md README.md.orig
-  trap 'mv README.md.orig README.md' EXIT
+  trap 'rm -f README.md.temp && mv README.md.orig README.md' EXIT
 else
-  trap 'rm README.md' EXIT
+  trap 'rm -f README.md.temp && rm README.md' EXIT
 fi
+
+rewrite() {
+  local state=
+  local line
+  while IFS='' read -r line ; do
+    local a="${line:0:1}"
+    local b="${line:1:1}"
+    local z="${line: -1}"
+    if [[ $a$b == '> ' ]] ; then
+      printf '\n%s' "${line:2}"
+      state=input
+    elif [[ -n $state && $a$b == '. ' ]] ; then
+      printf '\n%s' "${line:2}"
+    elif [[ $state == input && $a$z == '{}' ]] ; then
+      printf ';\n%s' "($line)"
+      state=output
+    elif [[ $state == input ]] ; then
+      printf ';\n%s' "$line"
+      state=output
+    elif [[ $state == output ]] ; then
+      printf ';\n%s' "$line"
+      state=
+    else
+      printf '\n%s' "$line"
+    fi
+  done
+}
 
 VERSION=0.0.0 run generate-readme
 
@@ -21,3 +48,8 @@ node_modules/.bin/remark \
   --use remark-lint-no-undefined-references \
   --use remark-lint-no-unused-definitions \
   -- README.md
+
+cp README.md README.md.temp
+rewrite <README.md.temp >README.md
+
+node_modules/.bin/eslint -- README.md
