@@ -7,11 +7,11 @@
   //. Returns its argument.
   //.
   //. ```javascript
-  //. > identity([1, 2, 3])
+  //. > identity ([1, 2, 3])
   //. [1, 2, 3]
   //. ```
   function identity(x) { return x; }
 
   module.exports = identity;
 
-}());
+} ());
