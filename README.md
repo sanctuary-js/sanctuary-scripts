@@ -40,13 +40,7 @@ __sanctuary-generate-readme__ when using npm scripts).
     ```json
     {
       "root": true,
-      "extends": ["./node_modules/sanctuary-style/eslint-es3.json"],
-      "overrides": [
-        {
-          "files": ["*.md"],
-          "plugins": ["markdown"]
-        }
-      ]
+      "extends": ["./node_modules/sanctuary-style/eslint-es3.json"]
     }
     ```
 
