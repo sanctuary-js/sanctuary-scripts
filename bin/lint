@@ -20,7 +20,7 @@ fi
 run check-required-files
 node_modules/.bin/eslint \
   --report-unused-disable-directives \
-  -- "${files[@]}" '*.js' 'test/**/*.js'
+  -- "${files[@]}" '*.{js,mjs}' 'test/**/*.{js,mjs}'
 run lint-package-json
 run lint-bower-json
 run lint-readme
