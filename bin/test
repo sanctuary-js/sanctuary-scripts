@@ -8,5 +8,12 @@ run_custom_script test "$@"
 
 branches="$(get min-branch-coverage)"
 
-node_modules/.bin/istanbul cover node_modules/.bin/_mocha
-node_modules/.bin/istanbul check-coverage --branches "$branches"
+node_modules/.bin/nyc \
+  --check-coverage \
+  --branches    "$branches" \
+  --functions   0 \
+  --lines       0 \
+  --statements  0 \
+  --reporter    text \
+  --reporter    html \
+  -- node_modules/.bin/mocha
