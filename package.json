@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "doctest": "0.15.x",
-    "eslint": "4.9.x",
+    "eslint": "5.15.x",
     "eslint-plugin-markdown": "1.0.0-beta.8",
     "mocha": "5.x.x",
     "nyc": "13.x.x",
@@ -42,7 +42,7 @@
     "remark-lint-no-undefined-references": "1.x.x",
     "remark-lint-no-unused-definitions": "1.x.x",
     "remember-bower": "0.1.x",
-    "sanctuary-style": "2.0.x",
+    "sanctuary-style": "3.0.x",
     "spdx-expression-parse": "3.0.x",
     "transcribe": "1.1.1",
     "xyz": "3.0.x"
