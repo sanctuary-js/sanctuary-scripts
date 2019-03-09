@@ -81,19 +81,21 @@ For example:
 
 Many variables have default values and are therefore optional.
 
-| Variable name                 | Default value | Description                                                                   |
-| ----------------------------- | ------------- | ----------------------------------------------------------------------------- |
-| `repo-owner`                  |               | The name of the GitHub user or organization who owns the repository.          |
-| `repo-name`                   |               | The name of the GitHub repository.                                            |
-| `default-branch`              | `master`      | The name of the repository's default branch.                                  |
-| `min-branch-coverage`         | `100`         | The minimum acceptable branch coverage (as a percentage).                     |
-| `author-name`                 | `Sanctuary`   | The name of the individual or group to whom copyright should be attributed.   |
-| `license-file`                | `LICENSE`     | The name of the licence file.                                                 |
-| `source-files`                | `index.js`    | Space-separated list of filenames. Globbing is supported.                     |
-| `heading-level`               | `4`           | The `<h[1-6]>` level of headings transcribed from `heading-prefix` comments.  |
-| `heading-prefix`              | `#`           | The character which follows `//` to signify a heading to transcribe.          |
-| `comment-prefix`              | `.`           | The character which follows `//` to signify documentation to transcribe.      |
-| `version-tag-prefix`          | `v`           | The prefix of annotated version tags (`version-tag-prefix =` for no prefix).  |
+| Variable name                 | Default value         | Description                                                                   |
+| ----------------------------- | --------------------- | ----------------------------------------------------------------------------- |
+| `repo-owner`                  |                       | The name of the GitHub user or organization who owns the repository.          |
+| `repo-name`                   |                       | The name of the GitHub repository.                                            |
+| `default-branch`              | `master`              | The name of the repository's default branch.                                  |
+| `min-branch-coverage`         | `100`                 | The minimum acceptable branch coverage (as a percentage).                     |
+| `author-name`                 | `Sanctuary`           | The name of the individual or group to whom copyright should be attributed.   |
+| `license-file`                | `LICENSE`             | The name of the licence file.                                                 |
+| `source-files`                | `index.js`            | Space-separated list of filenames. Globbing is supported.                     |
+| `heading-level`               | `4`                   | The `<h[1-6]>` level of headings transcribed from `heading-prefix` comments.  |
+| `heading-prefix`              | `#`                   | The character which follows `//` to signify a heading to transcribe.          |
+| `comment-prefix`              | `.`                   | The character which follows `//` to signify documentation to transcribe.      |
+| `opening-delimiter`           | `` ```javascript ``   | The opening delimiter of doctest blocks in the source files.                  |
+| `closing-delimiter`           | `` ``` ``             | The closing delimiter of doctest blocks in the source files.                  |
+| `version-tag-prefix`          | `v`                   | The prefix of annotated version tags (`version-tag-prefix =` for no prefix).  |
 
 ### Custom scripts
 
@@ -116,9 +118,11 @@ Configurable via [variables][] (`license-file`).
 
 ### `doctest`
 
-Runs [`doctest`↗︎][] with suitable `--module` and `--prefix` values.
+Runs [`doctest`↗︎][] with suitable `--module`, `--prefix`,
+`--opening-delimiter`, and `--closing-delimiter` values.
 
-Configurable via [variables][] (`source-files`, `comment-prefix`).
+Configurable via [variables][] (`source-files`, `comment-prefix`,
+`opening-delimiter`, `closing-delimiter`).
 
 ### `generate-readme`
 
