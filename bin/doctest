@@ -12,5 +12,12 @@ files=($(get source-files))
 set -f ; shopt -u nullglob
 
 prefix="$(get comment-prefix)"
+opening="$(get opening-delimiter)"
+closing="$(get closing-delimiter)"
 
-node_modules/.bin/doctest --module commonjs --prefix "$prefix" -- "${files[@]}"
+node_modules/.bin/doctest \
+  --module commonjs \
+  --prefix "$prefix" \
+  --opening-delimiter "$opening" \
+  --closing-delimiter "$closing" \
+  -- "${files[@]}"

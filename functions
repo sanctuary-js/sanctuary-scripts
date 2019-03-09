@@ -28,6 +28,10 @@ get() {
     heading-level)          printf '4' ;;
     heading-prefix)         printf '#' ;;
     comment-prefix)         printf '.' ;;
+    opening-delimiter)      # shellcheck disable=SC2016
+                            printf '```javascript' ;;
+    closing-delimiter)      # shellcheck disable=SC2016
+                            printf '```' ;;
     version-tag-prefix)     printf 'v' ;;
     *)
       echo "'$1' not defined in $config" >&2
