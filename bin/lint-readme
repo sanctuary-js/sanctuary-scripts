@@ -13,31 +13,52 @@ else
   trap 'rm -f README.md.temp && rm README.md' EXIT
 fi
 
+opening="$(get opening-delimiter)"
+closing="$(get closing-delimiter)"
+
+# https://github.com/davidchambers/doctest/blob/0.16.0/lib/doctest.js#L173-L209
+# displays the algorithm upon which this function is based. Differences:
+#
+#   - `rewrite` does not strip prefixes, as they are not present in the readme;
+#   - `rewrite` must print all lines, not just those within doctest blocks; and
+#   - `rewrite` must insert semicolons (and possibly parens) to satisfy ESLint.
 rewrite() {
-  local state=
+  local state=closed
+  local prev=
   local line
   while IFS='' read -r line ; do
-    local a="${line:0:1}"
-    local b="${line:1:1}"
-    local z="${line: -1}"
-    if [[ $a$b == '> ' ]] ; then
-      printf '\n%s' "${line:2}"
+    if [[ $state == closed ]] ; then
+      if [[ $line == "$opening" ]] ; then
+        state=open
+      fi
+    elif [[ $line == "$closing" ]] ; then
+      state=closed
+      [[ $prev == *';' ]] || printf ';'
+    elif [[ ${line:0:2} == '> ' ]] ; then
+      line="${line:2}"
       state=input
-    elif [[ -n $state && $a$b == '. ' ]] ; then
-      printf '\n%s' "${line:2}"
-    elif [[ $state == input && $a$z == '{}' ]] ; then
-      printf ';\n%s' "($line)"
-      state=output
+    elif [[ ${line:0:2} == '. ' ]] ; then
+      line="${line:2}"
     elif [[ $state == input ]] ; then
-      printf ';\n%s' "$line"
-      state=output
+      if [[ $line == '{'*'}' ]] ; then
+        line="($line)"
+      fi
+      # If the line following an input line is empty, there is no output line.
+      # Revert to the "open" state to avoid inserting an unnecessary semicolon.
+      if [[ -z $line ]] ; then
+        state=open
+      else
+        state=output
+      fi
+      [[ $prev == *';' ]] || printf ';'
     elif [[ $state == output ]] ; then
-      printf ';\n%s' "$line"
-      state=
-    else
-      printf '\n%s' "$line"
+      state=open
+      [[ $prev == *';' ]] || printf ';'
     fi
+    printf '\n%s' "$line"
+    prev="$line"
   done
+  printf '\n'
 }
 
 VERSION=0.0.0 run generate-readme
