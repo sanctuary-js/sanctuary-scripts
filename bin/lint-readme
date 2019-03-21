@@ -33,27 +33,22 @@ rewrite() {
       fi
     elif [[ $line == "$closing" ]] ; then
       state=closed
-      [[ $prev == *';' ]] || printf ';'
+      [[ $prev == *';' ]] || [[ -z $prev ]] || printf ';'
     elif [[ ${line:0:2} == '> ' ]] ; then
       line="${line:2}"
       state=input
     elif [[ ${line:0:2} == '. ' ]] ; then
       line="${line:2}"
     elif [[ $state == input ]] ; then
-      if [[ $line == '{'*'}' ]] ; then
+      if [[ ${line:0:2} == '! ' ]] ; then
+        line=
+      elif [[ $line == '{'*'}' ]] ; then
         line="($line)"
       fi
-      # If the line following an input line is empty, there is no output line.
-      # Revert to the "open" state to avoid inserting an unnecessary semicolon.
-      if [[ -z $line ]] ; then
-        state=open
-      else
-        state=output
-      fi
-      [[ $prev == *';' ]] || printf ';'
+      [[ $prev == *';' ]] || [[ -z $prev ]] || printf ';'
     elif [[ $state == output ]] ; then
       state=open
-      [[ $prev == *';' ]] || printf ';'
+      [[ $prev == *';' ]] || [[ -z $prev ]] || printf ';'
     fi
     printf '\n%s' "$line"
     prev="$line"
