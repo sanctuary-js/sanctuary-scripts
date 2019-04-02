@@ -14,9 +14,10 @@ set -f ; shopt -u nullglob
 prefix="$(get comment-prefix)"
 opening="$(get opening-delimiter)"
 closing="$(get closing-delimiter)"
+module="$(get module-type)"
 
 node_modules/.bin/doctest \
-  --module commonjs \
+  --module "$module" \
   --prefix "$prefix" \
   --opening-delimiter "$opening" \
   --closing-delimiter "$closing" \
