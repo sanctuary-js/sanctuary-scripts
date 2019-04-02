@@ -16,4 +16,6 @@ node_modules/.bin/nyc \
   --statements  0 \
   --reporter    text \
   --reporter    html \
+  --extension   .js \
+  --extension   .mjs \
   -- node_modules/.bin/mocha
