@@ -72,3 +72,7 @@ pass() {
 fail() {
   echo $'\x1B[0;31m\xE2\x9C\x98\x1B[0m' "$@"
 }
+
+node_major_version() {
+  node --print process.versions.node | cut -d . -f 1
+}
