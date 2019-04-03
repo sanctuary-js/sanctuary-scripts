@@ -39,7 +39,7 @@
     "mocha": "5.x.x",
     "nyc": "13.x.x",
     "remark-cli": "6.x.x",
-    "remark-lint-no-undefined-references": "1.x.x",
+    "remark-lint-no-undefined-references": "1.1.x",
     "remark-lint-no-unused-definitions": "1.x.x",
     "remember-bower": "0.1.x",
     "sanctuary-style": "3.0.x",
