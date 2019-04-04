@@ -191,7 +191,7 @@ undefined link references or unused link definitions.
 Uses [`eslint`↗︎][] and [`eslint-plugin-markdown`↗︎][] to assert that the readme,
 when built, will not contain examples which violate the project's style guide.
 
-Configurable via [variables][] (`opening-delimiter`, `closing-delimiter`
+Configurable via [variables][] (`opening-delimiter`, `closing-delimiter`,
 `module-type`).
 
 ### `prepublish`
