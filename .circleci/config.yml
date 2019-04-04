@@ -11,16 +11,7 @@ jobs:
     parallelism: 1
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - cabal-cache-{{ checksum ".circleci/config.yml" }}
-      - run: sudo apt-get install cabal-install
-      - run: cabal update
-      - run: cabal sandbox init
-      - run: cabal install shellcheck-0.4.7
-      - save_cache:
-          key: cabal-cache-{{ checksum ".circleci/config.yml" }}
-          paths:
-            - .cabal-sandbox
+      - run: sudo apt-get update
+      - run: sudo apt-get install shellcheck
       - run: npm install
-      - run: PATH="$(pwd)/.cabal-sandbox/bin:$PATH" npm test
+      - run: npm test
