@@ -32,6 +32,7 @@ get() {
                             printf '```javascript' ;;
     closing-delimiter)      # shellcheck disable=SC2016
                             printf '```' ;;
+    module-type)            printf 'commonjs' ;;
     version-tag-prefix)     printf 'v' ;;
     *)
       echo "'$1' not defined in $config" >&2
@@ -70,4 +71,8 @@ pass() {
 
 fail() {
   echo $'\x1B[0;31m\xE2\x9C\x98\x1B[0m' "$@"
+}
+
+node_major_version() {
+  node --print process.versions.node | cut -d . -f 1
 }

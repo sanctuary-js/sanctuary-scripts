@@ -95,6 +95,7 @@ Many variables have default values and are therefore optional.
 | `comment-prefix`              | `.`                   | The character which follows `//` to signify documentation to transcribe.      |
 | `opening-delimiter`           | `` ```javascript ``   | The opening delimiter of doctest blocks in the source files.                  |
 | `closing-delimiter`           | `` ``` ``             | The closing delimiter of doctest blocks in the source files.                  |
+| `module-type`                 | `commonjs`            | The module system doctest should use (`amd`, `commonjs`, or `esm`).           |
 | `version-tag-prefix`          | `v`                   | The prefix of annotated version tags (`version-tag-prefix =` for no prefix).  |
 
 ### Custom scripts
@@ -122,7 +123,7 @@ Runs [`doctest`↗︎][] with suitable `--module`, `--prefix`,
 `--opening-delimiter`, and `--closing-delimiter` values.
 
 Configurable via [variables][] (`source-files`, `comment-prefix`,
-`opening-delimiter`, `closing-delimiter`).
+`opening-delimiter`, `closing-delimiter`, `module-type`).
 
 ### `generate-readme`
 
@@ -190,7 +191,8 @@ undefined link references or unused link definitions.
 Uses [`eslint`↗︎][] and [`eslint-plugin-markdown`↗︎][] to assert that the readme,
 when built, will not contain examples which violate the project's style guide.
 
-Configurable via [variables][] (`opening-delimiter`, `closing-delimiter`).
+Configurable via [variables][] (`opening-delimiter`, `closing-delimiter`
+`module-type`).
 
 ### `prepublish`
 

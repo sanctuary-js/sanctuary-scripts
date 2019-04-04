@@ -15,6 +15,7 @@ fi
 
 opening="$(get opening-delimiter)"
 closing="$(get closing-delimiter)"
+module="$(get module-type)"
 
 # https://github.com/davidchambers/doctest/blob/0.16.0/lib/doctest.js#L173-L209
 # displays the algorithm upon which this function is based. Differences:
@@ -68,4 +69,12 @@ node_modules/.bin/remark \
 cp README.md README.md.temp
 rewrite <README.md.temp >README.md
 
-node_modules/.bin/eslint -- README.md
+if [[ $module == esm ]] ; then
+  source=module
+else
+  source=script
+fi
+
+node_modules/.bin/eslint \
+  --parser-options "sourceType:$source" \
+  -- README.md
