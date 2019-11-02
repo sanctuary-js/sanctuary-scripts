@@ -45,7 +45,7 @@
     "sanctuary-style": "3.0.x",
     "spdx-expression-parse": "3.0.x",
     "transcribe": "1.1.2",
-    "xyz": "3.0.x"
+    "xyz": "4.0.x"
   },
   "devDependencies": {},
   "scripts": {
