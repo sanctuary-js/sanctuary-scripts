@@ -150,17 +150,11 @@ Runs the following linters:
   - [`check-required-files`][]
   - [`eslint`↗︎][]
   - [`lint-package-json`][]
-  - [`lint-bower-json`][]
   - [`lint-readme`][]
   - [`lint-commit-messages`][]
 
 Configurable via [variables][] (`source-files` and those respected by the
 aforementioned linters).
-
-### `lint-bower-json`
-
-Uses [`remember-bower`↗︎][] to assert that __bower.json__ exists and is in sync
-with __package.json__.
 
 ### `lint-commit-messages`
 
@@ -233,7 +227,6 @@ Configurable via [variables][] (`author-name`, `license-file`).
 [`doctest`]:                  #doctest
 [`generate-readme`]:          #generate-readme
 [`lint`]:                     #lint
-[`lint-bower-json`]:          #lint-bower-json
 [`lint-commit-messages`]:     #lint-commit-messages
 [`lint-package-json`]:        #lint-package-json
 [`lint-readme`]:              #lint-readme
@@ -250,6 +243,5 @@ Configurable via [variables][] (`author-name`, `license-file`).
 [`eslint`↗︎]:                  https://eslint.org/
 [`eslint-plugin-markdown`↗︎]:  https://github.com/eslint/eslint-plugin-markdown
 [`remark`↗︎]:                  http://remark.js.org/
-[`remember-bower`↗︎]:          https://github.com/davidchambers/remember-bower
 [`transcribe`↗︎]:              https://github.com/plaid/transcribe
 [`xyz`↗︎]:                     https://github.com/davidchambers/xyz
