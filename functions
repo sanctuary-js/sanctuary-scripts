@@ -23,6 +23,7 @@ get() {
     default-branch)         printf 'master' ;;
     min-branch-coverage)    printf '100' ;;
     author-name)            printf 'Sanctuary' ;;
+    contributing-file)      printf 'CONTRIBUTING.md' ;;
     license-file)           printf 'LICENSE' ;;
     source-files)           printf 'index.js' ;;
     heading-level)          printf '4' ;;

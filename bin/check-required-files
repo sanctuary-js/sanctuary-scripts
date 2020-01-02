@@ -6,6 +6,7 @@ source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
 
 run_custom_script check-required-files "$@"
 
+contributing="$(get contributing-file)"
 license="$(get license-file)"
 declare -i failures=0
 
@@ -22,7 +23,7 @@ check -f .config
 check -f .eslintrc.json
 check -f .gitignore
 check -f .npmrc
-check -f CONTRIBUTING.md
+check -f "$contributing"
 check -f "$license"
 check -f package.json
 
