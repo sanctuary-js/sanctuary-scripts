@@ -88,6 +88,7 @@ Many variables have default values and are therefore optional.
 | `default-branch`              | `master`              | The name of the repository's default branch.                                  |
 | `min-branch-coverage`         | `100`                 | The minimum acceptable branch coverage (as a percentage).                     |
 | `author-name`                 | `Sanctuary`           | The name of the individual or group to whom copyright should be attributed.   |
+| `contributing-file`           | `CONTRIBUTING.md`     | The name of the CONTRIBUTING file.                                            |
 | `license-file`                | `LICENSE`             | The name of the licence file.                                                 |
 | `source-files`                | `index.js`            | Space-separated list of filenames. Globbing is supported.                     |
 | `heading-level`               | `4`                   | The `<h[1-6]>` level of headings transcribed from `heading-prefix` comments.  |
@@ -115,7 +116,7 @@ custom script run the default script.
 
 Asserts that the project contains important files such as a licence file.
 
-Configurable via [variables][] (`license-file`).
+Configurable via [variables][] (`contributing-file`, `license-file`).
 
 ### `doctest`
 
