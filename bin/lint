@@ -19,6 +19,7 @@ fi
 
 run check-required-files
 node_modules/.bin/eslint \
+  --no-error-on-unmatched-pattern \
   --report-unused-disable-directives \
   -- "${files[@]}" '*.{js,mjs}' 'test/**/*.{js,mjs}'
 run lint-package-json
