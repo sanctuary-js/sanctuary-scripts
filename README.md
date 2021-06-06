@@ -91,6 +91,7 @@ Many variables have default values and are therefore optional.
 | `contributing-file`           | `CONTRIBUTING.md`     | The name of the CONTRIBUTING file.                                            |
 | `license-file`                | `LICENSE`             | The name of the licence file.                                                 |
 | `source-files`                | `index.js`            | Space-separated list of filenames. Globbing is supported.                     |
+| `readme-source-files`         | `index.js`            | Space-separated list of filenames. Globbing is supported.                     |
 | `heading-level`               | `4`                   | The `<h[1-6]>` level of headings transcribed from `heading-prefix` comments.  |
 | `heading-prefix`              | `#`                   | The character which follows `//` to signify a heading to transcribe.          |
 | `comment-prefix`              | `.`                   | The character which follows `//` to signify documentation to transcribe.      |
@@ -141,8 +142,9 @@ produce a Markdown readme:
 that the dependency's version be specified exactly (`"1.2.3"` rather
 than `"1.2.x"`, for example).
 
-Configurable via [variables][] (`repo-owner`, `repo-name`, `source-files`,
-`heading-level`, `heading-prefix`, `comment-prefix`, `version-tag-prefix`).
+Configurable via [variables][] (`repo-owner`, `repo-name`,
+`readme-source-files`, `heading-level`, `heading-prefix`, `comment-prefix`,
+`version-tag-prefix`).
 
 ### `lint`
 
