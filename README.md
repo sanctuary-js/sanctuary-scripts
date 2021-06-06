@@ -212,7 +212,8 @@ Configurable via [variables][] (`repo-owner`, `repo-name`, `default-branch`,
 Runs the project's [Mocha↗︎][] test suite via [Istanbul↗︎][] and asserts that the
 test suite satisfies the project's coverage requirements.
 
-Configurable via [variables][] (`min-branch-coverage`) and __test/mocha.opts__.
+Configurable via [variables][] (`min-branch-coverage`) and the `mocha` field of
+__package.json__.
 
 ### `update-copyright-year`
 
