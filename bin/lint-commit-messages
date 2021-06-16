@@ -31,8 +31,9 @@ branch_name() {
 # Find all commits to be merged, and assert that none of them exceeds
 # the character limit. Ignore merge commits to accommodate Travis, which
 # makes a merge commit (with a long message) in order to test the result
-# of merging the pull request.
-if git log --no-merges --format=%s "$default_branch.." | grep ".\\{$max_length\\}." ; then
+# of merging the pull request. Specify LC_CTYPE=C.UTF-8, if available,
+# so grep will count multibyte characters intelligently.
+if git log --no-merges --format=%s "$default_branch.." | LC_CTYPE="$(locale -a | grep '^C[.]UTF-8$' || echo "$LC_CTYPE")" grep ".\\{$max_length\\}." ; then
   fail "At least one commit summary exceeds $max_length-character limit"
   exit 1
 fi
