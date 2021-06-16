@@ -8,7 +8,7 @@ run_custom_script generate-readme "$@"
 
 set +f ; shopt -s nullglob
 # shellcheck disable=SC2207
-files=($(get source-files))
+files=($(get readme-source-files))
 set -f ; shopt -u nullglob
 
 (( ${#files[@]} == 0 )) && exit 0
