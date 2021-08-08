@@ -40,7 +40,7 @@
     "remark-cli": "7.x.x",
     "remark-lint-no-undefined-references": "1.1.x",
     "remark-lint-no-unused-definitions": "1.x.x",
-    "sanctuary-style": "4.0.x",
+    "sanctuary-style": "4.1.x",
     "spdx-expression-parse": "3.0.x",
     "transcribe": "1.1.2",
     "xyz": "4.0.x"
