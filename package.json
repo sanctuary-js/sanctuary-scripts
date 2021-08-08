@@ -29,10 +29,11 @@
     "sanctuary-update-copyright-year": "bin/update-copyright-year"
   },
   "engines": {
+    "node": ">=10.2.0",
     "npm": ">=3.0.0"
   },
   "dependencies": {
-    "doctest": "0.17.x",
+    "doctest": "0.18.x",
     "eslint": "6.8.x",
     "eslint-plugin-markdown": "1.0.x",
     "mocha": "8.x.x",
