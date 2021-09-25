@@ -90,8 +90,8 @@ Many variables have default values and are therefore optional.
 | `author-name`                 | `Sanctuary`           | The name of the individual or group to whom copyright should be attributed.   |
 | `contributing-file`           | `CONTRIBUTING.md`     | The name of the CONTRIBUTING file.                                            |
 | `license-file`                | `LICENSE`             | The name of the licence file.                                                 |
-| `source-files`                | `index.js`            | Space-separated list of filenames. Globbing is supported.                     |
-| `readme-source-files`         | `index.js`            | Space-separated list of filenames. Globbing is supported.                     |
+| `source-files`                | `index.js`            | Space-separated list of filenames. Globbing is supported (with `globstar`).   |
+| `readme-source-files`         | `index.js`            | Space-separated list of filenames. Globbing is supported (with `globstar`).   |
 | `heading-level`               | `4`                   | The `<h[1-6]>` level of headings transcribed from `heading-prefix` comments.  |
 | `heading-prefix`              | `#`                   | The character which follows `//` to signify a heading to transcribe.          |
 | `comment-prefix`              | `.`                   | The character which follows `//` to signify documentation to transcribe.      |

@@ -6,10 +6,10 @@ source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
 
 run_custom_script lint "$@"
 
-set +f ; shopt -s nullglob
+set +f ; shopt -s globstar nullglob
 # shellcheck disable=SC2207
 files=($(get source-files))
-set -f ; shopt -u nullglob
+set -f ; shopt -u globstar nullglob
 
 if [[ "${PUBLISHING-false}" == true ]] ; then
   echo 'Running "npm install" to negate "npm prune"'
