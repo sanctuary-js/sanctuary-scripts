@@ -35,7 +35,7 @@
   "dependencies": {
     "doctest": "0.18.x",
     "eslint": "8.2.x",
-    "eslint-plugin-markdown": "1.0.x",
+    "eslint-plugin-markdown": "2.2.x",
     "mocha": "8.x.x",
     "nyc": "15.x.x",
     "remark-cli": "7.x.x",
