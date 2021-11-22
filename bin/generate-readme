@@ -6,10 +6,10 @@ source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
 
 run_custom_script generate-readme "$@"
 
-set +f ; shopt -s nullglob
+set +f ; shopt -s globstar nullglob
 # shellcheck disable=SC2207
 files=($(get readme-source-files))
-set -f ; shopt -u nullglob
+set -f ; shopt -u globstar nullglob
 
 (( ${#files[@]} == 0 )) && exit 0
 
