@@ -40,7 +40,7 @@
     "nyc": "15.x.x",
     "remark-cli": "11.x.x",
     "remark-lint-no-undefined-references": "4.x.x",
-    "remark-lint-no-unused-definitions": "1.x.x",
+    "remark-lint-no-unused-definitions": "3.x.x",
     "sanctuary-style": "6.0.x",
     "spdx-expression-parse": "3.0.x",
     "transcribe": "1.1.2",
