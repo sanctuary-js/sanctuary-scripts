@@ -29,14 +29,14 @@
     "sanctuary-update-copyright-year": "bin/update-copyright-year"
   },
   "engines": {
-    "node": ">=12.22.0",
+    "node": ">=14.0.0",
     "npm": ">=3.0.0"
   },
   "dependencies": {
     "doctest": "0.19.x",
     "eslint": "8.34.x",
     "eslint-plugin-markdown": "1.0.x",
-    "mocha": "8.x.x",
+    "mocha": "10.x.x",
     "nyc": "15.x.x",
     "remark-cli": "7.x.x",
     "remark-lint-no-undefined-references": "1.1.x",

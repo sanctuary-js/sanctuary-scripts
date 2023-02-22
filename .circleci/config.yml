@@ -22,8 +22,8 @@ workflows:
   test:
     jobs:
       - test:
-          version: 12.22.0
-      - test:
           version: 14.0.0
       - test:
           version: 16.0.0
+      - test:
+          version: 18.0.0
