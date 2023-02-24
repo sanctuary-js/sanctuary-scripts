@@ -16,11 +16,6 @@ opening="$(get opening-delimiter)"
 closing="$(get closing-delimiter)"
 module="$(get module-type)"
 
-if [[ "$module" == esm ]] && [[ "$(node_major_version)" -lt 9 ]] ; then
-  echo 'Skipping ESM doctests on Node.js version less than v9.0.0' >&2
-  exit 0
-fi
-
 node_modules/.bin/doctest \
   --module "$module" \
   --prefix "$prefix" \
