@@ -1,10 +1,10 @@
 'use strict';
 
-var assert = require ('assert');
+const assert = require ('node:assert');
 
-var identity = require ('..');
+const identity = require ('..');
 
 
-test ('identity (42)', function() {
+test ('identity (42)', () => {
   assert.strictEqual (identity (42), 42);
 });
