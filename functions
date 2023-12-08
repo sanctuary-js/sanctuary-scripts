@@ -20,7 +20,7 @@ get() {
   done <"$config"
 
   case "$1" in
-    default-branch)         printf 'master' ;;
+    default-branch)         printf 'main' ;;
     min-branch-coverage)    printf '100' ;;
     author-name)            printf 'Sanctuary' ;;
     contributing-file)      printf 'CONTRIBUTING.md' ;;
