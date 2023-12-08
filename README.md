@@ -85,7 +85,7 @@ Many variables have default values and are therefore optional.
 | ----------------------------- | --------------------- | ----------------------------------------------------------------------------- |
 | `repo-owner`                  |                       | The name of the GitHub user or organization who owns the repository.          |
 | `repo-name`                   |                       | The name of the GitHub repository.                                            |
-| `default-branch`              | `master`              | The name of the repository's default branch.                                  |
+| `default-branch`              | `main`                | The name of the repository's default branch.                                  |
 | `min-branch-coverage`         | `100`                 | The minimum acceptable branch coverage (as a percentage).                     |
 | `author-name`                 | `Sanctuary`           | The name of the individual or group to whom copyright should be attributed.   |
 | `contributing-file`           | `CONTRIBUTING.md`     | The name of the CONTRIBUTING file.                                            |
