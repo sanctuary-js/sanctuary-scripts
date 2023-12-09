@@ -97,7 +97,7 @@ Many variables have default values and are therefore optional.
 | `comment-prefix`              | `.`                   | The character which follows `//` to signify documentation to transcribe.      |
 | `opening-delimiter`           | `` ```javascript ``   | The opening delimiter of doctest blocks in the source files.                  |
 | `closing-delimiter`           | `` ``` ``             | The closing delimiter of doctest blocks in the source files.                  |
-| `module-type`                 | `commonjs`            | The module system doctest should use (`amd`, `commonjs`, or `esm`).           |
+| `module-type`                 | `esm`                 | The module system doctest should use (`amd`, `commonjs`, or `esm`).           |
 | `version-tag-prefix`          | `v`                   | The prefix of annotated version tags (`version-tag-prefix =` for no prefix).  |
 
 ### Custom scripts
