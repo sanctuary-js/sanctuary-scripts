@@ -34,7 +34,7 @@ get() {
                             printf '```javascript' ;;
     closing-delimiter)      # shellcheck disable=SC2016
                             printf '```' ;;
-    module-type)            printf 'commonjs' ;;
+    module-type)            printf 'esm' ;;
     version-tag-prefix)     printf 'v' ;;
     *)
       echo "'$1' not defined in $config" >&2

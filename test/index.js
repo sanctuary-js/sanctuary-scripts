@@ -1,8 +1,6 @@
-'use strict';
+import assert from 'node:assert';
 
-const assert = require ('node:assert');
-
-const identity = require ('..');
+import {identity} from '../index.js';
 
 
 test ('identity (42)', () => {
