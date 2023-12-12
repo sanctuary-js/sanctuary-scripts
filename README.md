@@ -151,7 +151,6 @@ Runs the following linters:
   - [`check-required-files`][]
   - [`eslint`↗︎][]
   - [`lint-package-json`][]
-  - [`lint-readme`][]
   - [`lint-commit-messages`][]
 
 Configurable via [variables][] (`source-files` and those respected by the
@@ -177,17 +176,6 @@ Asserts that __package.json__ exists and contains important fields with
 suitable values.
 
 Configurable via [variables][] (`repo-owner`, `repo-name`).
-
-### `lint-readme`
-
-Uses [`remark`↗︎][] to assert that the readme, when built, will not contain any
-undefined link references or unused link definitions.
-
-Uses [`eslint`↗︎][] and [`eslint-plugin-markdown`↗︎][] to assert that the readme,
-when built, will not contain examples which violate the project's style guide.
-
-Configurable via [variables][] (`opening-delimiter`, `closing-delimiter`,
-`module-type`).
 
 ### `prepublish`
 
@@ -231,7 +219,6 @@ Configurable via [variables][] (`author-name`, `license-file`).
 [`lint`]:                     #lint
 [`lint-commit-messages`]:     #lint-commit-messages
 [`lint-package-json`]:        #lint-package-json
-[`lint-readme`]:              #lint-readme
 [`prepublish`]:               #prepublish
 [`release`]:                  #release
 [`test`]:                     #test
@@ -243,7 +230,5 @@ Configurable via [variables][] (`author-name`, `license-file`).
 [Mocha↗︎]:                     https://mochajs.org/
 [`doctest`↗︎]:                 https://github.com/davidchambers/doctest
 [`eslint`↗︎]:                  https://eslint.org/
-[`eslint-plugin-markdown`↗︎]:  https://github.com/eslint/eslint-plugin-markdown
-[`remark`↗︎]:                  http://remark.js.org/
 [`transcribe`↗︎]:              https://github.com/plaid/transcribe
 [`xyz`↗︎]:                     https://github.com/davidchambers/xyz
