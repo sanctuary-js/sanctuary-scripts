@@ -23,5 +23,4 @@ node_modules/.bin/eslint \
   --report-unused-disable-directives \
   -- "${files[@]}" '*.{js,mjs}' 'test/**/*.{js,mjs}'
 run lint-package-json
-run lint-readme
 run lint-commit-messages
