@@ -57,10 +57,10 @@ assert "isSortedObject(pkg.repository)
         && pkg.repository.url === 'git://github.com/$owner/$name.git'"
 
 assert "isSortedObject(pkg.scripts)
-        && matches(pkg.scripts.doctest, /^(bin[/]|sanctuary-)doctest$/)
-        && matches(pkg.scripts.lint,    /^(bin[/]|sanctuary-)lint$/)
-        && matches(pkg.scripts.release, /^(bin[/]|sanctuary-)release$/)
-        && matches(pkg.scripts.test,    /^npm run lint && (bin[/]|sanctuary-)test && npm run doctest$/)"
+        && pkg.scripts.doctest === 'sanctuary-doctest'
+        && pkg.scripts.lint === 'sanctuary-lint'
+        && pkg.scripts.release === 'sanctuary-release'
+        && pkg.scripts.test === 'npm run lint && sanctuary-test && npm run doctest'"
 
 assert "isSortedObject(pkg.dependencies)"
 
