@@ -1,5 +1,7 @@
 import assert from 'node:assert';
 
+import test from 'oletus';
+
 import {identity} from '../index.js';
 
 
