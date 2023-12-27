@@ -33,7 +33,7 @@
     "npm": ">=3.0.0"
   },
   "dependencies": {
-    "doctest": "0.20.x",
+    "doctest": "0.21.x",
     "eslint": "8.55.x",
     "mocha": "8.x.x",
     "nyc": "15.x.x",
