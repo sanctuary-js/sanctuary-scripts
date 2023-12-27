@@ -7,7 +7,9 @@ run_custom_script lint "$@"
 
 set +f ; shopt -s globstar nullglob
 # shellcheck disable=SC2207
-files=($(get source-files))
+source_files=($(get source-files))
+# shellcheck disable=SC2207
+test_files=($(get test-files))
 set -f ; shopt -u globstar nullglob
 
 if [[ "${PUBLISHING-false}" == true ]] ; then
@@ -20,6 +22,6 @@ run check-required-files
 node_modules/.bin/eslint \
   --no-error-on-unmatched-pattern \
   --report-unused-disable-directives \
-  -- "${files[@]}" '*.{js,mjs}' 'test/**/*.{js,mjs}'
+  -- "${source_files[@]}" '*.{js,mjs}' "${test_files[@]}"
 run lint-package-json
 run lint-commit-messages

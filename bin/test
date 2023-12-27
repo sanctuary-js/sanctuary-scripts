@@ -7,14 +7,21 @@ run_custom_script test "$@"
 
 branches="$(get min-branch-coverage)"
 
-node_modules/.bin/nyc \
-  --check-coverage \
-  --branches    "$branches" \
-  --functions   0 \
-  --lines       0 \
-  --statements  0 \
-  --reporter    text \
-  --reporter    html \
-  --extension   .js \
-  --extension   .mjs \
-  -- node_modules/.bin/mocha
+set +f ; shopt -s globstar nullglob
+# shellcheck disable=SC2207
+source_files=($(get source-files))
+# shellcheck disable=SC2207
+test_files=($(get test-files))
+set -f ; shopt -u globstar nullglob
+
+args=(
+  --check-coverage
+  --branches    "$branches"
+  --functions   0
+  --lines       0
+  --statements  0
+)
+for name in "${source_files[@]}" ; do
+  args+=(--include "$name")
+done
+node_modules/.bin/c8 "${args[@]}" -- node_modules/.bin/oletus -- "${test_files[@]}"

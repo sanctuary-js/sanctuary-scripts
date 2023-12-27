@@ -27,6 +27,7 @@ get() {
     license-file)           printf 'LICENSE' ;;
     source-files)           printf 'index.js' ;;
     readme-source-files)    printf 'index.js' ;;
+    test-files)             printf 'test/**/*.js' ;;
     heading-level)          printf '4' ;;
     heading-prefix)         printf '#' ;;
     comment-prefix)         printf '.' ;;

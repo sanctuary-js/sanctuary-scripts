@@ -33,10 +33,10 @@
     "npm": ">=3.0.0"
   },
   "dependencies": {
+    "c8": "8.0.x",
     "doctest": "0.21.x",
     "eslint": "8.55.x",
-    "mocha": "8.x.x",
-    "nyc": "15.x.x",
+    "oletus": "4.0.x",
     "sanctuary-style": "7.0.x",
     "spdx-expression-parse": "3.0.x",
     "transcribe": "1.1.2",
@@ -48,8 +48,5 @@
     "lint": "bin/lint",
     "release": "bin/release",
     "test": "npm run lint && bin/test && npm run doctest"
-  },
-  "mocha": {
-    "ui": "tdd"
   }
 }

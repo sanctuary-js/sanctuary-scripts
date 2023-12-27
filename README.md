@@ -90,6 +90,7 @@ Many variables have default values and are therefore optional.
 | `license-file`                | `LICENSE`             | The name of the licence file.                                                 |
 | `source-files`                | `index.js`            | Space-separated list of filenames. Globbing is supported (with `globstar`).   |
 | `readme-source-files`         | `index.js`            | Space-separated list of filenames. Globbing is supported (with `globstar`).   |
+| `test-files`                  | `test/**/*.js`        | Space-separated list of filenames. Globbing is supported (with `globstar`).   |
 | `heading-level`               | `4`                   | The `<h[1-6]>` level of headings transcribed from `heading-prefix` comments.  |
 | `heading-prefix`              | `#`                   | The character which follows `//` to signify a heading to transcribe.          |
 | `comment-prefix`              | `.`                   | The character which follows `//` to signify documentation to transcribe.      |
@@ -153,8 +154,8 @@ Runs the following linters:
   - [`lint-package-json`][]
   - [`lint-commit-messages`][]
 
-Configurable via [variables][] (`source-files` and those respected by the
-aforementioned linters).
+Configurable via [variables][] (`source-files`, `test-files`, and those
+respected by the aforementioned linters).
 
 ### `lint-commit-messages`
 
@@ -197,11 +198,10 @@ Configurable via [variables][] (`repo-owner`, `repo-name`, `default-branch`,
 
 ### `test`
 
-Runs the project's [Mocha↗︎][] test suite via [Istanbul↗︎][] and asserts that the
-test suite satisfies the project's coverage requirements.
+Runs [`oletus`↗︎][] via [`c8`↗︎][] to run the project's test suite and assert
+that it satisfies the project's coverage requirements.
 
-Configurable via [variables][] (`min-branch-coverage`) and the `mocha` field of
-__package.json__.
+Configurable via [variables][] (`min-branch-coverage`, `test-files`).
 
 ### `update-copyright-year`
 
@@ -226,9 +226,9 @@ Configurable via [variables][] (`author-name`, `license-file`).
 [custom scripts]:             #custom-scripts
 [variables]:                  #variables
 
-[Istanbul↗︎]:                  https://istanbul.js.org/
-[Mocha↗︎]:                     https://mochajs.org/
+[`c8`↗︎]:                      https://github.com/bcoe/c8
 [`doctest`↗︎]:                 https://github.com/davidchambers/doctest
 [`eslint`↗︎]:                  https://eslint.org/
+[`oletus`↗︎]:                  https://github.com/bearror/oletus
 [`transcribe`↗︎]:              https://github.com/plaid/transcribe
 [`xyz`↗︎]:                     https://github.com/davidchambers/xyz
