@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -euf -o pipefail
 
-# shellcheck source=functions
-source "${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+source "$(dirname "$(dirname "$(realpath "${BASH_SOURCE[0]}")")")/sanctuary-scripts/functions"
 
 set +f
 
@@ -23,15 +22,14 @@ header() {
 #!/usr/bin/env bash
 set -euf -o pipefail
 
-# shellcheck source=functions
-source "\${BASH_SOURCE%/*}/../sanctuary-scripts/functions"
+source "\$(dirname "\$(dirname "\$(realpath "\${BASH_SOURCE[0]}")")")/sanctuary-scripts/functions"
 
 run_custom_script $1 "\$@"
 EOF
 }
 
 for file in bin/* ; do
-  if [[ "$(head -n 7 "$file" | shasum -a 256)" == "$(header "$(basename "$file")" | shasum -a 256)" ]] ; then
+  if [[ "$(head -n 6 "$file" | shasum -a 256)" == "$(header "$(basename "$file")" | shasum -a 256)" ]] ; then
     pass "$file"
   else
     fail "$file"
