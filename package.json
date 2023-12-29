@@ -38,7 +38,6 @@
     "eslint": "8.55.x",
     "oletus": "4.0.x",
     "sanctuary-style": "7.0.x",
-    "spdx-expression-parse": "3.0.x",
     "transcribe": "1.1.2",
     "xyz": "4.0.x"
   },
