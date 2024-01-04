@@ -39,7 +39,7 @@
     "oletus": "4.0.x",
     "sanctuary-style": "7.0.x",
     "transcribe": "1.1.2",
-    "xyz": "4.0.x"
+    "xyz": "5.0.x"
   },
   "devDependencies": {},
   "scripts": {
