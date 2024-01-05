@@ -29,8 +29,7 @@
     "sanctuary-update-copyright-year": "bin/update-copyright-year"
   },
   "engines": {
-    "node": ">=12.22.0",
-    "npm": ">=3.0.0"
+    "node": ">=16.2.0"
   },
   "dependencies": {
     "c8": "8.0.x",
