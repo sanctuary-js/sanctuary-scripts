@@ -37,7 +37,7 @@
     "doctest": "0.21.x",
     "eslint": "8.55.x",
     "oletus": "4.0.x",
-    "sanctuary-style": "7.0.x",
+    "sanctuary-style": "8.0.x",
     "transcribe": "1.1.2",
     "xyz": "5.0.x"
   },
